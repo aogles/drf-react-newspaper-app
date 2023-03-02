@@ -7,6 +7,7 @@ import LoginForm from "./components/Auth/Loginform";
 import RegistrationForm from "./components/Auth/Registrationform";
 //import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ArticleForm from "./components/Article/ArticleForm";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +18,8 @@ root.render(
           <Route path="/login" element={<LoginForm />} />
           <Route path="/registration" element={<RegistrationForm />} />
         </Route>
+        <Route path="/ArticleForm" element={<ArticleForm />} />
+
         <Route
           path="*"
           element={

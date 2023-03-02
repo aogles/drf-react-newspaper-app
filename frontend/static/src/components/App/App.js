@@ -4,6 +4,8 @@ import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import ArticleList from "../Article/ArticlesList";
+import ArticleForm from "../Article/ArticleForm";
 
 function App() {
   const [isAuth, setAuth] = useState(!!Cookies.get("Authorization"));
@@ -38,6 +40,7 @@ function App() {
     <>
       <Header isAuth={isAuth} handleLogout={handleLogout} />
       <Outlet context={[setAuth]} />
+      <ArticleList />
     </>
   );
 }

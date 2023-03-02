@@ -5,8 +5,9 @@ from django.conf import settings
 
 
 class Article(models.Model):
-    user = models.ForeignKey(
+    author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="articles/", null=True)
     title = models.CharField(max_length=255)
     body = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now=True)

@@ -1,15 +1,20 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
+const INITIAL_STATE = {
+  username: "",
+  password: "",
+  email: "",
+};
 
 function LoginForm(props) {
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
-    email: "",
-  });
   const navigate = useNavigate();
   const [setAuth] = useOutletContext();
+  const [user, setUser] = useState(INITIAL_STATE);
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -45,35 +50,52 @@ function LoginForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div class="mb-3">
-        <label htmlfor="username" className="form-label">
-          Username
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="username"
-          value={user.username}
-          onChange={handleInput}
-        />
-      </div>
-      <div class="mb-3">
-        <label htmlfor="password" className="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="password"
-          value={user.password}
-          onChange={handleInput}
-        />
-      </div>
-      <button onClick="submit" type="submit" class="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter username"
+            name="username"
+            value={user.username}
+            onChange={handleInput}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={user.email}
+            onChange={handleInput}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter password"
+            name="password"
+            value={user.password}
+            onChange={handleInput}
+          />
+        </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Login
+        </Button>
+
+        <p>
+          Don't have an account? Click
+          <NavLink to="/register">here</NavLink>
+          to register.
+        </p>
+      </Form>
+    </>
   );
 }
 

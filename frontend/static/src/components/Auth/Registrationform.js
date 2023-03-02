@@ -1,14 +1,18 @@
 import { useState } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function RegistrationForm(props) {
   const [error, setError] = useState(null);
   const [user, setUser] = useState({
     username: "",
+    email: "",
     password1: "",
     password2: "",
-    email: "",
   });
+  const navigate = useNavigate();
 
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -44,71 +48,64 @@ function RegistrationForm(props) {
     }
     const data = await response.json();
     Cookies.set("Authorization", `Token ${data.key}`);
+    navigate("/login");
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div class="mb-3">
-        <label htmlfor="email" className="form-label">
-          Enter email address
-        </label>
-        <input
-          type="email"
-          className="form-control"
-          id="email"
-          name="email"
-          value={user.email}
-          onChange={handleInput}
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label htmlfor="username" className="form-label">
-          Username
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="username"
-          name="username"
-          value={user.username}
-          onChange={handleInput}
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label htmlfor="password1" className="form-label">
-          Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="password1"
-          name="password1"
-          value={user.password1}
-          onChange={handleInput}
-          required
-        />
-      </div>
-      <div class="mb-3">
-        <label htmlfor="password2" className="form-label">
-          Confirm Password
-        </label>
-        <input
-          type="password"
-          className="form-control"
-          id="password2"
-          name="password2"
-          value={user.password2}
-          onChange={handleInput}
-          required
-        />
-      </div>
-      <div>{error}</div>
-      <button onClick="submit" type="submit" class="btn btn-primary">
-        Submit
-      </button>
-    </form>
+    <>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter username"
+            name="username"
+            value={user.username}
+            onChange={handleInput}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={user.email}
+            onChange={handleInput}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword1">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Enter password"
+            name="password1"
+            value={user.password1}
+            onChange={handleInput}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword2">
+          <Form.Label>Please Verify Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Verify password"
+            name="password2"
+            value={user.password2}
+            onChange={handleInput}
+            required
+          />
+          <div style={{ color: "red" }}>{error}</div>
+        </Form.Group>
+
+        <Button className="register-button" variant="primary" type="submit">
+          Register
+        </Button>
+      </Form>
+    </>
   );
 }
 

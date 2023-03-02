@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* import { useState } from "react";
 import Cookies from "js-cookie";
 
 function Profile() {
@@ -64,3 +64,4 @@ function Profile() {
 }
 
 export default Profile;
+*/

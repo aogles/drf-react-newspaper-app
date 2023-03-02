@@ -29,6 +29,7 @@ function LoginForm(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     const options = {
       method: "POST",
       headers: {

@@ -25,7 +25,7 @@ urlpatterns = [
     path('api_v1/', include('api.urls', namespace="api_v1")),
     # namespace allow you to reference url by name
     path('api-auth/', include('rest_framework.urls')),
-    path('dj_rest_auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('dj-rest-auth/registration/', CustomRegisterView.as_view()),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

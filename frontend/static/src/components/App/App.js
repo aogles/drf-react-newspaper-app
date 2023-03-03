@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import ArticleList from "../Article/ArticlesList";
 import ArticleForm from "../Article/ArticleForm";
+import ArticleBoard from "../Article/Article";
+import Button from "react-bootstrap/Button";
 
 function App() {
   const [isAuth, setAuth] = useState(!!Cookies.get("Authorization"));
@@ -33,15 +35,21 @@ function App() {
     Cookies.remove("Authorization", `Token ${data.key}`);
 
     setAuth(false);
-    navigate("/");
+    navigate("/login");
   };
 
   return (
-    <>
-      <Header isAuth={isAuth} handleLogout={handleLogout} />
-      <Outlet context={[setAuth]} />
-      <ArticleList />
-    </>
+    <div className="wrapper">
+      <>
+        <Header isAuth={isAuth} />
+        <Button variant="secondary" type="submit" onSubmit={handleLogout}>
+          logout
+        </Button>
+        <Outlet context={[setAuth]} />
+        <ArticleBoard />
+        <ArticleList />
+      </>
+    </div>
   );
 }
 
